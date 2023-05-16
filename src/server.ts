@@ -14,6 +14,10 @@ app.use(cors());
 
 app.use("/api", protect, router);
 
+app.get("/", (req, res, next) => {
+  res.json({ message: "Hello" });
+});
+
 app.post("/user", createNewUser);
 app.post("/signin", signIn);
 
