@@ -16,7 +16,6 @@ model User {
   createdAt DateTime  @default(now())
   password  String
   products  Product[]
-  posts     Post[]
 }
 
 model Product {
@@ -64,19 +63,4 @@ model UpdatePoints {
 
   updateId String
   update   Update @relation(fields: [updateId], references: [id])
-}
-
-model Post {
-  id Int @id @default(autoincrement())
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  title   String  @db.VarChar(255)
-  content String?
-
-  published Boolean @default(false)
-
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String
 }

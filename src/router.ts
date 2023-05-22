@@ -14,6 +14,7 @@ import {
   getUpdates,
   updateUpdate,
 } from "./handlers/update";
+import { getAllUpdatePoints } from "./handlers/updatepoint";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -72,7 +73,7 @@ router.delete("/update/:id", deleteUpdate);
  * UpdatePoint
  */
 
-router.get("/updatepoint", (req, res) => {});
+router.get("/updatepoint", getAllUpdatePoints);
 
 router.get("/updatepoint/:id", (req, res) => {});
 
