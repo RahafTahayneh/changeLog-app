@@ -12,13 +12,13 @@ export const getAllUpdatePoints = async (req, res) => {
   res.json({ data: update.updatePoints });
 };
 
-// export const getProductById = async (req, res) => {
-//   const product = await prisma.product.findFirst({
-//     where: { id: req.params.id, belongsToId: req.user.id },
-//   });
+export const getUpdatePointById = async (req, res) => {
+  const updatePoint = await prisma.updatePoints.findUnique({
+    where: { id: req.params.id },
+  });
 
-//   res.json({ data: product });
-// };
+  res.json({ data: updatePoint });
+};
 
 // export const createProduct = async (req, res, next) => {
 //   try {
