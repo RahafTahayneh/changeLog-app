@@ -32,6 +32,7 @@ export const createUpdatePoint = async (req, res) => {
     data: {
       name: req.body.name,
       description: req.body.description,
+
       update: { connect: { id: update.id } },
     },
   });
@@ -39,25 +40,37 @@ export const createUpdatePoint = async (req, res) => {
   res.json({ data: updatePoint });
 };
 
-// export const updateProduct = async (req, res) => {
-//   const updated = await prisma.product.update({
-//     where: {
-//       id_belongsToId: { id: req.params.id, belongsToId: req.user.id },
-//     },
-//     data: {
-//       name: req.body.name,
-//     },
-//   });
+export const updateUpdatePoint = async (req, res) => {
+  const updatePoints = await prisma.updatePoints.findUnique({
+    where: { id: req.params.id },
+  });
 
-//   res.json({ data: updated });
-// };
+  if (!updatePoints) {
+    res.json({ message: "no update point exist" });
+  }
 
-// export const deleteProduct = async (req, res) => {
-//   const deleted = await prisma.product.delete({
-//     where: {
-//       id_belongsToId: { id: req.params.id, belongsToId: req.user.id },
-//     },
-//   });
+  const updatedUpdatePoint = await prisma.updatePoints.update({
+    where: {
+      id: req.params.id,
+    },
+    data: req.body,
+  });
+  res.json({ data: updatedUpdatePoint });
+};
 
-//   res.json({ data: deleted });
-// };
+export const deleteUpdatePoint = async (req, res) => {
+  const updatePoints = await prisma.updatePoints.findUnique({
+    where: { id: req.params.id },
+  });
+
+  if (!updatePoints) {
+    res.json({ message: "no update point exist" });
+  }
+
+  const deleted = await prisma.updatePoints.delete({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.json({ data: deleted });
+};

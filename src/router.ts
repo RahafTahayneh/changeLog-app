@@ -16,8 +16,10 @@ import {
 } from "./handlers/update";
 import {
   createUpdatePoint,
+  deleteUpdatePoint,
   getAllUpdatePoints,
   getUpdatePointById,
+  updateUpdatePoint,
 } from "./handlers/updatepoint";
 import { handleInputErrors } from "./modules/middleware";
 
@@ -93,9 +95,9 @@ router.put(
   "/updatepoint/:id",
   body("name").optional().isString(),
   body("description").optional().isString(),
-  (req, res) => {}
+  updateUpdatePoint
 );
 
-router.delete("/updatepoint/:id", (req, res) => {});
+router.delete("/updatepoint/:id", deleteUpdatePoint);
 
 export default router;
