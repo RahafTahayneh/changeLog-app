@@ -14,7 +14,11 @@ import {
   getUpdates,
   updateUpdate,
 } from "./handlers/update";
-import { getAllUpdatePoints, getUpdatePointById } from "./handlers/updatepoint";
+import {
+  createUpdatePoint,
+  getAllUpdatePoints,
+  getUpdatePointById,
+} from "./handlers/updatepoint";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -82,7 +86,7 @@ router.post(
   body("name").exists().isString(),
   body("description").exists().isString(),
   body("updateId").exists().isString(),
-  (req, res) => {}
+  createUpdatePoint
 );
 
 router.put(

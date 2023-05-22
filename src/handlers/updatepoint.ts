@@ -20,17 +20,24 @@ export const getUpdatePointById = async (req, res) => {
   res.json({ data: updatePoint });
 };
 
-// export const createProduct = async (req, res, next) => {
-//   try {
-//     const product = await prisma.product.create({
-//       data: { name: req.body.name, belongsToId: req.user.id },
-//     });
+export const createUpdatePoint = async (req, res) => {
+  const update = await prisma.update.findUnique({
+    where: { id: req.body.updateId },
+  });
+  if (!update) {
+    return res.json({ message: "nope" });
+  }
 
-//     res.json({ data: product });
-//   } catch (e) {
-//     next(e);
-//   }
-// };
+  const updatePoint = await prisma.updatePoints.create({
+    data: {
+      name: req.body.name,
+      description: req.body.description,
+      update: { connect: { id: update.id } },
+    },
+  });
+
+  res.json({ data: updatePoint });
+};
 
 // export const updateProduct = async (req, res) => {
 //   const updated = await prisma.product.update({
